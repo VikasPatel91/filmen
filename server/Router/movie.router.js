@@ -9,23 +9,25 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-router.use("/uploads", express.static(path.join(__dirname, "/uploads")));
- 
+router.use(
+  "../client/public/moviedata",
+  express.static(path.join(__dirname, "../client/public/moviedata/"))
+);
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads/");
+    cb(null, "../client/public/moviedata/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); 
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
 const upload = multer({ storage: storage });
 
-
 router.get("/check", (req, res) => {
   res.send("hello");
-}); 
+});
 
 router.post(
   "/upload",
@@ -34,8 +36,8 @@ router.post(
     { name: "bgImg" },
     { name: "movieFile" },
   ]),
-  uploadMovie 
+  uploadMovie
 );
 
-router.get("/movies", getMovies); 
+router.get("/movies", getMovies);
 export default router;

@@ -43,7 +43,7 @@ const RegisterPage = () => {
     formData.append("gender", regData.gender);
     formData.append("password", regData.password);
     formData.append("confirmPassword", regData.confirmPassword);
-    // const imageToSend = avatar ? avatar : "my.img";
+    const imageToSend = avatar ? avatar : "my.img";
     if (avatar) {
       formData.append("avatar", imageToSend);
     }

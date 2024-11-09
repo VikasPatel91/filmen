@@ -3,10 +3,10 @@ import multer from "multer";
 import { login, logout, register } from "../Controller/auth.controller.js";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "upload/");
+    cb(null, "../client/public/userdata/");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); 
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 const upload = multer({ storage: storage });

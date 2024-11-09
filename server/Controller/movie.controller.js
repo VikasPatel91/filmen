@@ -1,11 +1,9 @@
-
 import Movie from "../Model/movieSchema.js";
-
 
 export const uploadMovie = async (req, res) => {
   const { title, year, length, age, date, des, category } = req.body;
 
-  try { 
+  try {
     const newMovie = new Movie({
       title,
       year,
@@ -14,9 +12,9 @@ export const uploadMovie = async (req, res) => {
       date,
       des,
       category,
-      titleImg: req.files.titleImg[0].path,
-      bgImg: req.files.bgImg[0].path,
-      movieFile: req.files.movieFile[0].path,
+      titleImg: req.files.titleImg[0].filename,
+      bgImg: req.files.bgImg[0].filename,
+      movieFile: req.files.movieFile[0].filename,
     });
     await newMovie.save();
     res
@@ -27,7 +25,6 @@ export const uploadMovie = async (req, res) => {
   }
 };
 
-
 export const getMovies = async (req, res) => {
   try {
     const movies = await Movie.find();
@@ -36,3 +33,5 @@ export const getMovies = async (req, res) => {
     res.status(500).json({ message: "Error fetching movies", error });
   }
 };
+  
+

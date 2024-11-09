@@ -6,7 +6,7 @@ import User from "../Model/userSchema.js";
 export const register = async (req, res) => {
   try {
     const { fullName, username, email, password, gender } = req.body;
-    const avatar = req.file ? req.file.path : null;
+    const avatar = req.file ? req.file.filename : null;
 
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
