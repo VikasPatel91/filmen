@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-const DB = mongoose.connect("mongodb://127.0.0.1/movies");
-DB.then((result) => {
-  console.log("DataBase Connected");
-});
-DB.catch((err) => {
-  console.log("DataBase Not Connected");
-});
+const DB = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log("Database Connected");
+  } catch (err) {
+    console.log("Database Not Connected", err);
+  }
+};
 
-export default DB;
+DB();
+
+export default mongoose;
