@@ -57,7 +57,6 @@ const RegisterPage = () => {
       console.error("Registration failed:", error);
     }
   };
-
   return (
     <div className="register-mainDiv">
       <div className="content-div">

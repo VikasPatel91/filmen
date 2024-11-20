@@ -129,7 +129,10 @@ const MovieUpload = () => {
               id="movie"
               onChange={handleMovie}
             />
-            <button className="mt-3 btn btn-warning " onClick={handleUpload}>
+            
+          </div>
+          <div>
+          <button className="mt-3 btn btn-warning upload-button" onClick={handleUpload}>
               Upload
             </button>
           </div>

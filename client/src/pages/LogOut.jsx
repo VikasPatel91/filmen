@@ -13,9 +13,9 @@ const LogOut = ({ name }) => {
   return (
     <div className="logout-mainDiv">
       <div className="logout-img-div">
-        <img src="/assets/images/titleImg.png" alt="Profile Image" />
+      <img src={`/userdata/${name.avatar}`} alt="serverImg"/>
         <p>
-          <span className="username">{name}</span>
+          <span className="username">{name.fullName}</span>
         </p>
       </div>
       <hr />

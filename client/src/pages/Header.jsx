@@ -37,10 +37,17 @@ function Header() {
           onMouseLeave={handleMouseLeave}
           style={{ position: "relative" }}
         >
-          <img src="/assets/images/titleImg.png" alt="profileImg" />
+          {/*  */}
+          {
+            currentUser?(
+              <img src={`/userdata/${currentUser.avatar}`} alt="serverImg"/>
+            ):(
+              <img src="/assets/images/titleImg.png" alt="profileImg" />
+            )
+          }
           {isDropdownVisible && (
             <div className="logout-dropdown">
-              <LogOut name={currentUser.username} />
+              <LogOut name={currentUser} />
             </div>
           )}
         </div>

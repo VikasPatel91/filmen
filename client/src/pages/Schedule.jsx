@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Schedule.css";
 import Card from "../components/Card";
+import Mcard from "../components/Mcard";
 
 const Schedule = () => {
   const filtersList = [
@@ -43,21 +44,35 @@ const Schedule = () => {
 
   const [data, setData] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [mdata, setMdata] = useState([]);
   const [filter, setFilter] = useState(filtersList);
-
   const fetchData = () => {
     fetch("http://localhost:5173/data/movieData.json")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((e) => console.log(e.message));
   };
-
+  const [movieData, setMovieData] = useState([]);
+  const fetchMovieData = () => {
+    fetch("http://localhost:3500/api/movies")
+      .then((res) => res.json())
+      .then((data) => setMovieData(data))
+      .catch((e) => console.log(e.message()));
+  };
+  useEffect(() => {
+    fetchMovieData();
+  }, []);
   useEffect(() => {
     fetchData();
   }, []);
   useEffect(() => {
     setMovies(data);
   }, [data]);
+
+  useEffect(() => {
+    setMdata(movieData);
+  }, [movieData]);
+
 
   const handleFilterMovies = (category) => {
     setFilter(
@@ -71,10 +86,13 @@ const Schedule = () => {
     );
     if (category === "All") {
       setMovies(data);
+      setMdata(movieData);
       return;
     }
     const filteredMovies = data.filter((movie) => movie.category === category);
     setMovies(filteredMovies);
+    const fMovies = movieData.filter((movie) => movie.category === category);
+    setMdata(fMovies);
   };
 
   return (
@@ -102,6 +120,11 @@ const Schedule = () => {
           {movies &&
             movies.length > 0 &&
             movies.map((movie) => <Card key={movie._id} movie={movie} />)}
+          {
+            mdata &&
+            mdata.length>0 &&
+            mdata.map((movie) => <Mcard key={movie._id} movie={movie} />)
+          }
         </div>
       </div>
     </section>
